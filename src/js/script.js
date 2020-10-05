@@ -41,7 +41,6 @@ class Player {
     this.playerDeck = playerDeck;
     this.winningRounds = 0;
   }
-
   addWinningRounds() {
     this.winningRounds++;
     return this;
@@ -61,12 +60,11 @@ class Player {
 }
 
 class Card {
-  constructor(rank, name, value) {
+  constructor(rank, suit, value) {
     this.rank = rank;
-    this.name = name;
+    this.suit = suit;
     this.value = value;
   }
-
   printCard() {}
 }
 
@@ -77,7 +75,6 @@ class WarGame {
     this.playerTwo = new Player(playerTwo, this.deck.deal(26));
     console.log(this.playerOne);
   }
-
   playRound() {
     let playerOneCard = this.playerOne.playCard();
     let playerTwoCard = this.playerTwo.playCard();
@@ -90,7 +87,6 @@ class WarGame {
       this.prepareForWar();
     }
   }
-
   giveWinningCards(playerName, winningCards) {
     this[playerName].addWinningCards(winningCards);
     this[playerName].addWinningRounds();
@@ -134,6 +130,5 @@ class WarGame {
 }
 
 let war = new WarGame("Tom", "Computer");
-
 war.playRound();
 console.log(war);
