@@ -47,7 +47,7 @@ class Player {
   }
   addWinningCards(cards) {
     this.playerDeck.push(...cards);
-    return this;
+    return this.playerDeck;
   }
   playCard() {
     return this.playerDeck.pop();
@@ -73,7 +73,6 @@ class WarGame {
     this.deck = new Deck().shuffleDeck();
     this.playerOne = new Player(playerOne, this.deck.deal(26));
     this.playerTwo = new Player(playerTwo, this.deck.deal(26));
-    console.log(this.playerOne);
   }
   playRound() {
     let playerOneCard = this.playerOne.playCard();
@@ -84,7 +83,7 @@ class WarGame {
       this.giveWinningCards("playerTwo", [playerOneCard, playerTwoCard]);
     } else {
       console.log("cards tied");
-      this.prepareForWar();
+      this.prepareForWar(playerOneCard, playerTwoCard);
     }
   }
   giveWinningCards(playerName, winningCards) {
@@ -99,12 +98,13 @@ class WarGame {
     }
   }
   prepareForWar(playerOne, playerTwo) {
+    console.log(this.playerOne.playerDeck, ":::", this.playerTwo.playerDeck);
     let burnPile = [];
     let p1Cards = this.playerOne.giveThreeCards();
     let p2Cards = this.playerTwo.giveThreeCards();
     burnPile.push(...p1Cards);
     burnPile.push(...p2Cards);
-    console.log(burnPile);
+    console.log("burnPile:", burnPile);
     let p1 = this.playerOne.playCard();
     let p2 = this.playerTwo.playCard();
     if (p1 % 13 < p2 % 13) {
