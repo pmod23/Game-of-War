@@ -75,17 +75,24 @@ class WarGame {
     this.playerTwo = new Player(playerTwo, this.deck.deal(26));
   }
   playRound() {
+    let winner = "cards tied"
     let playerOneCard = this.playerOne.playCard();
     let playerTwoCard = this.playerTwo.playCard();
     if (playerOneCard % 13 < playerTwoCard % 13) {
       this.giveWinningCards("playerOne", [playerOneCard, playerTwoCard]);
+      winner = "playerOne"
     } else if (playerTwoCard % 13 < playerOneCard % 13) {
       this.giveWinningCards("playerTwo", [playerOneCard, playerTwoCard]);
+      winner = "playerTwo"
     } else {
       console.log("cards tied");
-      this.prepareForWar(playerOneCard, playerTwoCard);
+      this.prepareForWar(playerOneCard, playerTwoCard)
     }
+    console.log(winner)
+    console.log(`player one played ${playerOneCard}`)
+    console.log(`player two played ${playerTwoCard}`)
   }
+
   giveWinningCards(playerName, winningCards) {
     this[playerName].addWinningCards(winningCards);
     this[playerName].addWinningRounds();
@@ -128,6 +135,7 @@ class WarGame {
     }
   }
 }
+
 
 let war = new WarGame("Tom", "Computer");
 war.playRound();
